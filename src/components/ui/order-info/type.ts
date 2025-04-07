@@ -4,7 +4,7 @@ export type OrderInfoUIProps = {
   orderInfo: TOrderInfo;
 };
 
-type TOrderInfo = {
+export type TOrderInfo = {
   ingredientsInfo: {
     [key: string]: TIngredient & { count: number };
   };
