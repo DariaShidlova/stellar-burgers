@@ -1,17 +1,19 @@
 import { FC, useMemo } from 'react';
 import { BurgerConstructorUI } from '@ui';
-import {
-  selectConstructorItems,
-  selectBurgerLoading,
-  selectCurrentOrder,
-  selectUser,
-  createOrder,
-  clearConstructor,
-  clearOrder
-} from '../../slices/burger-slice';
 import { useAppSelector, useAppDispatch } from '../../services/store';
 import { TConstructorIngredient } from '@utils-types';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { selectUser } from '../../slices/auth/authSlice';
+import {
+  clearConstructor,
+  selectConstructorItems
+} from '../../slices/constructor/constructorSlice';
+import {
+  clearOrder,
+  selectCurrentOrder,
+  selectOrdersLoading
+} from '../../slices/orders/orderSlice';
+import { createOrder } from '../../slices/orders/orderActions';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +21,7 @@ export const BurgerConstructor: FC = () => {
   const location = useLocation();
 
   const user = useAppSelector(selectUser);
-  const orderRequest = useAppSelector(selectBurgerLoading);
+  const orderRequest = useAppSelector(selectOrdersLoading);
   const constructorItems = useAppSelector(selectConstructorItems);
   const orderModalData = useAppSelector(selectCurrentOrder);
 

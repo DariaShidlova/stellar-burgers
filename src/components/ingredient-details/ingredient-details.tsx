@@ -4,14 +4,14 @@ import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { useAppSelector } from '../../services/store';
 import {
-  selectIngredients,
-  selectBurgerLoading
-} from '../../slices/burger-slice';
+  selectIngredientsData,
+  selectIngredientsLoading
+} from '../../slices/ingredients/ingredientsSlice';
 
 export const IngredientDetails: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const ingredients = useAppSelector(selectIngredients);
-  const isLoading = useAppSelector(selectBurgerLoading);
+  const ingredients = useAppSelector(selectIngredientsData);
+  const isLoading = useAppSelector(selectIngredientsLoading);
 
   const ingredientData = ingredients.find((ing) => ing._id === id);
 

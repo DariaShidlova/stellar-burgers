@@ -14,17 +14,17 @@ import {
   ProfileOrders
 } from '@pages';
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import {
-  fetchFeed,
-  fetchIngredients,
-  fetchUser,
-  selectUser,
-  selectAuthChecked,
-  setAuthChecked
-} from '../../slices/burger-slice';
 import { deleteCookie, getCookie } from '../../utils/cookie';
 import { useAppDispatch, useAppSelector } from '../../services/store';
 import { ProtectedRoute } from '../protected-route/protected-route';
+import {
+  fetchUser,
+  selectAuthChecked,
+  selectUser,
+  setAuthChecked
+} from '../../slices/auth/authSlice';
+import { fetchIngredients } from '../../slices/ingredients/ingredientsActions';
+import { fetchFeed } from '../../slices/orders/orderActions';
 
 export const App = () => {
   const dispatch = useAppDispatch();

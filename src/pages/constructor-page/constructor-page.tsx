@@ -1,13 +1,15 @@
+import { useAppSelector } from '../../services/store';
+import { selectIngredientsLoading } from '../../slices/ingredients/ingredientsSlice';
+
 import styles from './constructor-page.module.css';
+
 import { BurgerIngredients } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
-import { useAppSelector } from '../../services/store';
-import { selectBurgerLoading } from '../../slices/burger-slice';
 
 export const ConstructorPage: FC = () => {
-  const isIngredientsLoading = useAppSelector(selectBurgerLoading);
+  const isIngredientsLoading = useAppSelector(selectIngredientsLoading);
 
   return (
     <>

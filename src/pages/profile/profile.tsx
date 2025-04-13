@@ -2,15 +2,15 @@ import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../services/store';
 import {
+  selectAuthLoading,
   selectUser,
-  updateUser,
-  selectBurgerLoading
-} from '../../slices/burger-slice';
+  updateUser
+} from '../../slices/auth/authSlice';
 
 export const Profile: FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
-  const isLoading = useAppSelector(selectBurgerLoading);
+  const isLoading = useAppSelector(selectAuthLoading);
 
   const [formValue, setFormValue] = useState({
     name: user?.name || '',

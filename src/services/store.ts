@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import stellarBurgerReducer from '../slices/burger-slice';
+import ingredientsReducer from '../slices/ingredients/ingredientsSlice';
+import constructorReducer from '../slices/constructor/constructorSlice';
+import ordersReducer from '../slices/orders/orderSlice';
+import authReducer from '../slices/auth/authSlice';
 
 const store = configureStore({
   reducer: {
-    stellarBurger: stellarBurgerReducer
+    ingredients: ingredientsReducer,
+    burgerConstructor: constructorReducer,
+    orders: ordersReducer,
+    auth: authReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 });

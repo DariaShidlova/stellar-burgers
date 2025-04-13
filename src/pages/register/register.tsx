@@ -1,12 +1,12 @@
 import { FC, SyntheticEvent, useState } from 'react';
 import { RegisterUI } from '@ui-pages';
 import { useAppDispatch, useAppSelector } from '../../services/store';
+import { Preloader } from '@ui';
 import {
   registerUser,
-  selectBurgerError,
-  selectBurgerLoading
-} from '../../slices/burger-slice';
-import { Preloader } from '@ui';
+  selectAuthError,
+  selectAuthLoading
+} from '../../slices/auth/authSlice';
 
 export const Register: FC = () => {
   const [userName, setUserName] = useState('');
@@ -14,8 +14,8 @@ export const Register: FC = () => {
   const [password, setPassword] = useState('');
 
   const dispatch = useAppDispatch();
-  const error = useAppSelector(selectBurgerError);
-  const isLoading = useAppSelector(selectBurgerLoading);
+  const error = useAppSelector(selectAuthError);
+  const isLoading = useAppSelector(selectAuthLoading);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();

@@ -1,10 +1,6 @@
 import React, { FC, memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../services/store';
-import {
-  addIngredient,
-  selectConstructorItems
-} from '../../../slices/burger-slice';
 import styles from './burger-ingredient.module.css';
 import {
   Counter,
@@ -12,6 +8,10 @@ import {
   AddButton
 } from '@zlden/react-developer-burger-ui-components';
 import { TBurgerIngredientUIProps } from './type';
+import {
+  addIngredient,
+  selectConstructorItems
+} from '../../../slices/constructor/constructorSlice';
 
 export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
   ({ ingredient, locationState }) => {

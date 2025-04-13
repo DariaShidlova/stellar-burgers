@@ -1,7 +1,6 @@
 import React, { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../services/store';
-import { selectIngredients } from '../../../slices/burger-slice';
 import {
   CurrencyIcon,
   FormattedDate
@@ -11,10 +10,11 @@ import styles from './order-card.module.css';
 import { OrderCardUIProps } from './type';
 import { OrderStatus } from '@components';
 import { TIngredient } from '@utils-types';
+import { selectIngredientsData } from '../../../slices/ingredients/ingredientsSlice';
 
 export const OrderCardUI: FC<OrderCardUIProps> = memo(
   ({ orderInfo, maxIngredients, locationState }) => {
-    const ingredients = useAppSelector(selectIngredients);
+    const ingredients = useAppSelector(selectIngredientsData);
     const enrichedOrderInfo = {
       ...orderInfo,
       ingredientsToShow: orderInfo.ingredients

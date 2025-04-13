@@ -3,18 +3,16 @@ import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '@ui';
 import { useAppDispatch, useAppSelector } from '../../services/store';
-import {
-  selectViewedOrder,
-  selectIngredients,
-  fetchOrderByNumber
-} from '../../slices/burger-slice';
 import { TOrderInfo } from '../ui/order-info/type';
+import { selectViewedOrder } from '../../slices/orders/orderSlice';
+import { selectIngredientsData } from '../../slices/ingredients/ingredientsSlice';
+import { fetchOrderByNumber } from '../../slices/orders/orderActions';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams<{ number: string }>();
   const dispatch = useAppDispatch();
   const order = useAppSelector(selectViewedOrder);
-  const ingredients = useAppSelector(selectIngredients);
+  const ingredients = useAppSelector(selectIngredientsData);
 
   useEffect(() => {
     if (number) dispatch(fetchOrderByNumber(parseInt(number)));
