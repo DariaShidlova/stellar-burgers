@@ -27,7 +27,7 @@ type TAuthState = {
   error: string | null;
 };
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
   user: null,
   isAuthChecked: false,
   isLoading: false,
@@ -119,24 +119,30 @@ const authSlice = createSlice({
     builder
       // Авторизация/регистрация
       .addCase(registerUser.fulfilled, (state, action) => {
-        handleAuthSuccess(state, action.payload); // Используем хелпер
+        handleAuthSuccess(state, action.payload);
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        handleAuthSuccess(state, action.payload); // Используем хелпер
+        handleAuthSuccess(state, action.payload);
       })
       // Сброс данных пользователя
       .addCase(logoutUser.fulfilled, (state) => {
         state.isLoading = false;
         state.user = null;
       })
-      .addCase(fetchUser.fulfilled, (state, action) => {
-        handleAuthSuccess(state, action.payload); // Используем хелпер
+      .addCase(fetchUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
       })
-      .addCase(fetchUser.rejected, (state) => {
-        state.isAuthChecked = true; // Проверка завершена, даже если ошибка
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        handleAuthSuccess(state, action.payload);
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message || 'Failed to fetch user';
+        state.isAuthChecked = true;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        handleAuthSuccess(state, action.payload); // Используем хелпер
+        handleAuthSuccess(state, action.payload);
       })
       .addMatcher(
         (action) => action.type.startsWith('auth/') && isPending(action),
@@ -151,7 +157,7 @@ const authSlice = createSlice({
         ): action is PayloadAction<unknown, string, any, SerializedError> =>
           action.type.startsWith('auth/') && isRejected(action),
         (state, action) => {
-          handleAuthError(state, action.error.message || 'Ошибка авторизации'); // Используем хелпер
+          handleAuthError(state, action.error.message || 'Ошибка авторизации');
         }
       );
   }

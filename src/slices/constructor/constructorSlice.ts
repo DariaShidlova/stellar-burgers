@@ -14,7 +14,7 @@ type TConstructorState = {
   error: string | null;
 };
 
-const initialState: TConstructorState = {
+export const initialState: TConstructorState = {
   constructorItems: {
     bun: null,
     ingredients: []
@@ -28,23 +28,19 @@ const constructorSlice = createSlice({
   initialState,
   reducers: {
     addIngredient: {
-      reducer: (
-        state,
-        action: PayloadAction<TConstructorIngredient>
-      ) => {
+      reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
         if (action.payload.type === 'bun') {
           state.constructorItems.bun = action.payload;
         } else {
           state.constructorItems.ingredients.push(action.payload);
         }
       },
-      prepare: (ingredient: TIngredient) =>
-        ({
-          payload: {
-            ...ingredient,
-            uniqueId: uuidv4()
-          }
-        })
+      prepare: (ingredient: TIngredient) => ({
+        payload: {
+          ...ingredient,
+          uniqueId: uuidv4()
+        }
+      })
     },
     removeIngredient: (state, action: PayloadAction<string>) => {
       state.constructorItems.ingredients =

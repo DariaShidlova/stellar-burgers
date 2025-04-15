@@ -11,7 +11,7 @@ type TIngredientsState = {
   viewedIngredient: TIngredient | null;
 };
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   ingredients: [],
   isLoading: false,
   error: null,
@@ -27,10 +27,19 @@ const ingredientsSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchIngredients.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.ingredients = action.payload;
-    });
+    builder
+      .addCase(fetchIngredients.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchIngredients.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.ingredients = action.payload;
+      })
+      .addCase(fetchIngredients.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message || 'Failed to fetch ingredients';
+      });
   }
 });
 

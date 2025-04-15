@@ -22,6 +22,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
     {constructorItems.bun ? (
       <div className={`${styles.element} mb-4 mr-4`}>
         <ConstructorElement
+          data-testid='constructor-bun-top'
           type='top'
           isLocked
           text={`${constructorItems.bun.name} (верх)`}
@@ -50,6 +51,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         )
       ) : (
         <div
+          data-testid='constructor-ingredient'
           className={`${styles.noBuns} ml-8 mb-4 mr-5 text text_type_main-default`}
         >
           Выберите начинку
@@ -59,6 +61,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
     {constructorItems.bun ? (
       <div className={`${styles.element} mt-4 mr-4`}>
         <ConstructorElement
+          data-testid='constructor-bun-bottom'
           type='bottom'
           isLocked
           text={`${constructorItems.bun.name} (низ)`}

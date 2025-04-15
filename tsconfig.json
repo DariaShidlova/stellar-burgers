@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "noEmit": false,
     "jsx": "react-jsx",
-    "types": ["node", "jest"],
+    "types": ["cypress", "node", "jest"],
     "baseUrl": ".",
     "paths": {
       "@pages": ["src/pages"],

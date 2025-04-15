@@ -7,7 +7,6 @@ import {
 } from '../../utils/burger-api';
 import { TOrder } from '../../utils/types';
 
-//Отправляет список ID ингредиентов для создания заказа
 export const createOrder = createAsyncThunk(
   'burger/createOrder',
   async (ingredientIds: string[]) => {
@@ -16,13 +15,11 @@ export const createOrder = createAsyncThunk(
   }
 );
 
-//Получает общую ленту всех заказов
 export const fetchFeed = createAsyncThunk('burger/fetchFeed', async () => {
   const data = await getFeedsApi();
   return data;
 });
 
-//Загружает историю заказов текущего пользователя
 export const fetchUserOrders = createAsyncThunk(
   'burger/fetchUserOrders',
   async () => {
@@ -36,7 +33,7 @@ export const fetchOrderByNumber = createAsyncThunk(
   async (number: number) => {
     const response = await getOrderByNumberApi(number);
     if (response.orders && response.orders.length > 0) {
-      return response.orders[0]; // Возвращаем первый заказ из массива
+      return response.orders[0];
     }
     throw new Error('Заказ не найден');
   }
