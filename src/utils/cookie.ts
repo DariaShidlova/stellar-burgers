@@ -40,7 +40,6 @@ export function setCookie(
     }
   }
   document.cookie = updatedCookie;
-  console.log(localStorage.getItem('token'));
 }
 
 export function deleteCookie(name: string) {

@@ -1,29 +1,25 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../services/store';
-import {
-  selectAuthLoading,
-  selectUser,
-  updateUser
-} from '../../slices/auth/authSlice';
 
 export const Profile: FC = () => {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
-  const isLoading = useAppSelector(selectAuthLoading);
+  /** TODO: взять переменную из стора */
+  const user = {
+    name: '',
+    email: ''
+  };
 
   const [formValue, setFormValue] = useState({
-    name: user?.name || '',
-    email: user?.email || '',
+    name: user.name,
+    email: user.email,
     password: ''
   });
 
   useEffect(() => {
-    setFormValue({
+    setFormValue((prevState) => ({
+      ...prevState,
       name: user?.name || '',
-      email: user?.email || '',
-      password: ''
-    });
+      email: user?.email || ''
+    }));
   }, [user]);
 
   const isFormChanged =
@@ -33,14 +29,13 @@ export const Profile: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(updateUser(formValue));
   };
 
   const handleCancel = (e: SyntheticEvent) => {
     e.preventDefault();
     setFormValue({
-      name: user?.name || '',
-      email: user?.email || '',
+      name: user.name,
+      email: user.email,
       password: ''
     });
   };
@@ -52,10 +47,6 @@ export const Profile: FC = () => {
     }));
   };
 
-  if (isLoading) {
-    return null;
-  }
-
   return (
     <ProfileUI
       formValue={formValue}
@@ -65,4 +56,6 @@ export const Profile: FC = () => {
       handleInputChange={handleInputChange}
     />
   );
+
+  return null;
 };

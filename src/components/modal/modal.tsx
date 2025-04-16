@@ -1,6 +1,6 @@
 import { FC, memo, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { useNavigate, useLocation } from 'react-router-dom';
+
 import { TModalProps } from './type';
 import { ModalUI } from '@ui';
 

@@ -1,25 +1,11 @@
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ProfileMenuUI } from '@ui';
-import { useAppDispatch } from '../../services/store';
-import { deleteCookie } from '../../utils/cookie';
-import { logoutUser } from '../../slices/auth/authSlice';
 
 export const ProfileMenu: FC = () => {
   const { pathname } = useLocation();
-  const dispatch = useAppDispatch();
 
-  const handleLogout = () => {
-    dispatch(logoutUser())
-      .unwrap()
-      .then(() => {
-        deleteCookie('accessToken');
-        localStorage.removeItem('refreshToken');
-      })
-      .catch((error) => {
-        console.error('Ошибка выхода:', error);
-      });
-  };
+  const handleLogout = () => {};
 
   return <ProfileMenuUI handleLogout={handleLogout} pathname={pathname} />;
 };
