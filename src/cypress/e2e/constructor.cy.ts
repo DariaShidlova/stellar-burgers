@@ -21,29 +21,78 @@ describe('Burger Constructor Tests', () => {
 
   it('should add ingredients to constructor', () => {
     // Добавление и проверка булки
-    cy.get('[data-testid="ingredient-bun"]').first().click();
-    cy.get('[data-testid="constructor-bun-top"]').should(
-      'contain',
-      'Краторная булка N-200i (верх)'
-    );
-    cy.get('[data-testid="constructor-bun-bottom"]').should(
-      'contain',
-      'Краторная булка N-200i (низ)'
-    );
+    // cy.get('[data-testid="ingredient-bun"]').first().click();
+    // cy.get('[data-testid="constructor-bun-top"]').should(
+    //   'contain',
+    //   'Краторная булка N-200i (верх)'
+    // );
+    // cy.get('[data-testid="constructor-bun-bottom"]').should(
+    //   'contain',
+    //   'Краторная булка N-200i (низ)'
+    // );
+    cy.get('[data-testid="constructor-bun-top"]').should('not.exist')
+    cy.get('[data-testid="constructor-bun-bottom"]').should('not.exist')
+  
+    // 2. Добавляем первую булку
+    cy.get('[data-testid="ingredient-bun"]')
+      .first()
+      .within(() => {
+        cy.get('[data-testid="add-ingredient-button"]').click() // Кликаем конкретно на кнопку добавления
+      })
+      
+    // 3. Проверяем добавление именно этой булки
+    cy.get('[data-testid="constructor-bun-top"]')
+      .should('contain', 'Краторная булка N-200i (верх)')
+      .and('be.visible')
+  
+    cy.get('[data-testid="constructor-bun-bottom"]')
+      .should('contain', 'Краторная булка N-200i (низ)')
+      .and('be.visible')
 
-    // Попытка добавить вторую булку
-    cy.get('[data-testid="ingredient-bun"]').eq(1).click();
-    cy.get('[data-testid="constructor-bun-top"]').should(
-      'not.contain',
-      'Флюоресцентная булка R2-D3'
-    );
+      // 4. Пытаемся добавить вторую булку
+  cy.get('[data-testid="ingredient-bun"]')
+  .eq(1)
+  .within(() => {
+    cy.get('[data-testid="add-ingredient-button"]').click()
+  })
 
-    // Добавление и проверка начинки
-    cy.get('[data-testid="ingredient-main"]').first().click();
-    cy.get('[data-testid="constructor-ingredient"]')
-      .should('have.length', 1)
-      .and('contain', 'Биокотлета из марсианской Магнолии');
-  });
+// 5. Проверяем замену булки
+cy.get('[data-testid="constructor-bun-top"]')
+  .should('contain', 'Флюоресцентная булка R2-D3 (верх)')
+  
+cy.get('[data-testid="constructor-bun-bottom"]')
+  .should('contain', 'Флюоресцентная булка R2-D3 (низ)')
+  .and('not.contain', 'Краторная булка N-200i')
+
+  // 6. Проверяем добавление начинки с тем же подходом
+  cy.get('[data-testid="constructor-ingredient"]').should('not.exist')
+  
+  cy.get('[data-testid="ingredient-main"]')
+    .first()
+    .within(() => {
+      cy.get('[data-testid="add-ingredient-button"]').click()
+    })
+
+  cy.get('[data-testid="constructor-ingredient"]')
+    .should('have.length', 1)
+    .and('contain', 'Биокотлета из марсианской Магнолии')
+})
+
+    // // Попытка добавить вторую булку
+    // cy.get('[data-testid="ingredient-bun"]').eq(1).click();
+    // cy.get('[data-testid="constructor-bun-top"]').should(
+    //   'not.contain',
+    //   'Флюоресцентная булка R2-D3'
+    // );
+
+  //   // Добавление и проверка начинки
+  //   cy.get('[data-testid="ingredient-main"]').first().click();
+  //   cy.get('[data-testid="constructor-ingredient"]')
+  //     .should('have.length', 1)
+  //     .and('contain', 'Биокотлета из марсианской Магнолии');
+  // });
+
+
 
   it('should handle ingredient modal', () => {
     // Проверка открытия и содержимого модалки
