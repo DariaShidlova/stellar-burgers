@@ -15,9 +15,3 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-beforeEach(() => {
-    cy.window().then((win) => {
-      const overlay = win.document.getElementById('webpack-dev-server-client-overlay');
-      if (overlay) overlay.remove();
-    });
-  });
