@@ -66,15 +66,20 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
               location.pathname.startsWith('/profile') ? 'primary' : 'secondary'
             }
           />
-          <p
-            className={`text text_type_main-default ml-2 ${
-              location.pathname.startsWith('/profile')
-                ? ''
-                : 'text_color_inactive'
-            }`}
-          >
-            {userName || 'Личный кабинет'}
-          </p>
+          {userName ? (
+            <p
+              className={`text text_type_main-default ml-2`}
+              data-testid='user-name'
+            >
+              {userName}
+            </p>
+          ) : (
+            <p
+              className={`text text_type_main-default ml-2 text_color_inactive`}
+            >
+              Личный кабинет
+            </p>
+          )}
         </Link>
       </nav>
     </header>

@@ -35,3 +35,23 @@
 //     }
 //   }
 // }
+declare namespace Cypress {
+    interface Chainable {
+      login(): void;
+      mockIngredients(): void;
+      mockOrder(): void;
+    }
+  }
+  
+  Cypress.Commands.add('login', () => {
+    cy.setCookie('accessToken', 'mock-token');
+    localStorage.setItem('refreshToken', 'mock-refresh-token');
+  });
+  
+  Cypress.Commands.add('mockIngredients', () => {
+    cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' }).as('getIngredients');
+  });
+  
+  Cypress.Commands.add('mockOrder', () => {
+    cy.intercept('POST', 'api/orders', { fixture: 'order.json' }).as('createOrder');
+  });
