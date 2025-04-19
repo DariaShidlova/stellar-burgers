@@ -93,6 +93,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         <CurrencyIcon type='primary' />
       </div>
       <Button
+        data-testid="constructor-order-button"
         htmlType='button'
         type='primary'
         size='large'
@@ -111,6 +112,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       <Modal
         onClose={closeOrderModal}
         title={orderRequest ? 'Оформляем заказ...' : ''}
+         data-testid="order-modal"
       >
         <OrderDetailsUI
           orderNumber={orderModalData.number}
