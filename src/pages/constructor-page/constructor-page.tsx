@@ -1,4 +1,5 @@
-import { useSelector } from '../../services/store';
+import { useAppSelector } from '../../services/store';
+import { selectIngredientsLoading } from '../../slices/ingredients/ingredientsSlice';
 
 import styles from './constructor-page.module.css';
 
@@ -8,15 +9,17 @@ import { Preloader } from '../../components/ui';
 import { FC } from 'react';
 
 export const ConstructorPage: FC = () => {
-  /** TODO: взять переменную из стора */
-  const isIngredientsLoading = false;
+  const isIngredientsLoading = useAppSelector(selectIngredientsLoading);
 
   return (
     <>
       {isIngredientsLoading ? (
         <Preloader />
       ) : (
-        <main className={styles.containerMain}>
+        <main
+          className={styles.containerMain}
+          data-testid='constructor-container'
+        >
           <h1
             className={`${styles.title} text text_type_main-large mt-10 mb-5 pl-5`}
           >
